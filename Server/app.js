@@ -1,26 +1,22 @@
-
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { authRouter } from './routes/auth.routes.js'
-import {errorMiddleware} from './middleware/error-middleware.js'
+import { errorMiddleware } from './middleware/error-middleware.js'
 import { env } from './config/env.js'
 import helmet from 'helmet'
-import {MongoDB} from './utils/db.js'
-import {productList} from "./routes/product.routes.js"
+import { MongoDB } from './utils/db.js'
+import { productList } from "./routes/product.routes.js"
 
-
-const app  = express()
+const app = express()
 const PORT = env.PORT
 
-
-
-const corsOption =  {
-    method:['POST','GET','PUT','PATCH','DELETE'],
-    origin:env.UI_URL,
-    credentials:true
-    
+const corsOption = {
+    methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'],
+    origin: env.UI_URL,
+    credentials: true
 }
+
 app.use(cors(corsOption))
 app.use(helmet())
 
@@ -31,11 +27,10 @@ app.use(cookieParser())
 
 app.use(authRouter)
 
-app.use("/product",productList)
+app.use("/product", productList)
 
 app.use(errorMiddleware)
 
-
-app.listen(PORT,() =>{
-    console.log(`Server running on address http://localhost:${PORT}`)
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
 })
