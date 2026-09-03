@@ -11,9 +11,14 @@ import { productList } from "./routes/product.routes.js"
 const app = express()
 const PORT = env.PORT
 
+const allowedOrigins = [
+  env.UI_URL_MAIN,
+  env.UI_URL_SUB
+];
+
 const corsOption = {
     methods: ['POST', 'GET', 'PUT', 'PATCH', 'DELETE'],
-    origin: env.UI_URL,
+    origin: allowedOrigins,
     credentials: true
 }
 
