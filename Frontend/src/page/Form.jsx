@@ -15,7 +15,7 @@ const Form = () => {
 
   const getFetchData = async () => {
     try {
-      const response = await api.get("/product/get");
+      const response = await api.get("/get");
 
       const data = await response.data;
       console.log(data);
@@ -40,11 +40,11 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/product/add", data);
+      const response = await api.post("/add", data);
       toast.success(response.data.message);
       getFetchData();
 
-      setGetData({
+      setData({
         title: "",
         description: "",
       });
@@ -56,7 +56,7 @@ const Form = () => {
 
   const handleClick = async (id) => {
     try {
-      const response = await api.delete(`/product/delete/${id}`);
+      const response = await api.delete(`/delete/${id}`);
       const data = await response.data;
       toast.success(data.message);
       getFetchData();
@@ -78,7 +78,7 @@ const Form = () => {
     try
     {
 
-      const response = await api.patch(`/product/update/${editData._id}`, {
+      const response = await api.patch(`/update/${editData._id}`, {
         title:editData.title,
         description:editData.description
       });
